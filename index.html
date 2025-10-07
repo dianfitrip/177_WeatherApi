@@ -75,5 +75,24 @@
             });
         }
 
+        // --- Event Listeners: Kode yang Menunggu Aksi dari Pengguna ---
+
+        // Menambahkan 'event listener' ke tombol dengan id 'tombolGet'.
+        // Fungsi di dalamnya akan berjalan setiap kali tombol tersebut di-klik.
+        $('#tombolGet').on('click', function() {
+            // Mengambil nilai (teks) yang sedang ada di dalam kotak input 'inputLokasi'.
+            const lokasiInput = $('#inputLokasi').val();
+            
+            // Memeriksa apakah input tidak kosong.
+            if (lokasiInput) {
+                // Jika tidak kosong, panggil fungsi getWeather dengan nilai dari input.
+                getWeather(lokasiInput);
+            } else {
+                // Jika kosong, beri peringatan.
+                alert("Silakan masukkan nama lokasi.");
+            }
+        });
+
+    </script>
 </body>
 </html>
