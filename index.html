@@ -27,6 +27,53 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
- 
+    
+    <script>
+        // Mendefinisikan sebuah fungsi bernama 'getWeather' yang menerima satu parameter: 'lokasi'.
+        // Fungsi ini bisa dipanggil berulang kali untuk lokasi yang berbeda.
+        function getWeather(lokasi) {
+            // Kunci API unik Anda dari website weatherapi.com
+            const apiKey = "d0b2b6b1294e4872adc65553250710"; 
+            
+            // Membangun URL API secara dinamis menggunakan 'template literal' (tanda `).
+            // Variabel 'apiKey' dan 'lokasi' akan dimasukkan ke dalam URL.
+            const urlApi = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+
+            // Memulai permintaan data ke server API menggunakan fungsi 'ajax' dari jQuery.
+            $.ajax({
+                url: urlApi,    // URL tujuan permintaan
+                method: "GET",  // Metode permintaan (GET untuk mengambil data)
+                
+                // 'success' adalah fungsi yang akan dijalankan JIKA permintaan berhasil.
+                // Parameter 'data' berisi objek JSON yang dikirim oleh server API.
+                success: function(data) {
+                    // Menampilkan seluruh objek data di console browser, berguna untuk debugging.
+                    console.log(data);
+                    
+                    // -- Memasukkan data dari API ke elemen-elemen HTML --
+                    // '$('#id_elemen')' adalah cara jQuery memilih elemen berdasarkan ID-nya.
+                    // '.text(nilai)' adalah cara jQuery mengubah konten teks dari elemen tersebut.
+                    
+                    // Mengisi data cuaca
+                    $('#suhu_c').text(data.current.temp_c);
+                    $('#suhu_f').text(data.current.temp_f);
+                    $('#kelembapan').text(data.current.humidity);
+
+                    // Mengisi data lokasi
+                    $('#negara').text(data.location.country);
+                    $('#provinsi').text(data.location.region);
+                    $('#kota').text(data.location.name);
+                    $('#longitude').text(data.location.lon);
+                    $('#latitut').text(data.location.lat);
+                },
+                
+                // 'error' adalah fungsi yang akan dijalankan JIKA permintaan gagal.
+                error: function(error) {
+                    console.log(error); // Menampilkan detail error di console.
+                    alert("Lokasi tidak ditemukan atau terjadi kesalahan."); // Memberi notifikasi ke pengguna.
+                }
+            });
+        }
+
 </body>
 </html>
