@@ -93,6 +93,24 @@
             }
         });
 
+        // Menambahkan 'event listener' untuk tombol keyboard pada kotak input.
+        // Ini memungkinkan pengguna menekan 'Enter' untuk mencari.
+        $('#inputLokasi').on('keypress', function(e) {
+            // 'e.which' berisi kode tombol yang ditekan. Kode untuk 'Enter' adalah 13.
+            if (e.which === 13) {
+                // Jika 'Enter' ditekan, secara programatik kita "mengklik" tombol 'tombolGet'.
+                $('#tombolGet').click();
+            }
+        });
+
+        // Menjalankan kode ini setelah seluruh halaman HTML selesai dimuat.
+        // Ini untuk memastikan semua elemen HTML sudah siap sebelum dimanipulasi oleh JavaScript.
+        $(document).ready(function() {
+            // Memanggil fungsi getWeather dengan lokasi default "Yogyakarta"
+            // agar halaman tidak kosong saat pertama kali dibuka.
+            getWeather("Yogyakarta");
+        });
+
     </script>
 </body>
 </html>
